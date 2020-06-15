@@ -205,15 +205,18 @@ server {
     }
 
     location /.well-known/matrix/server {
-        return 200 '{ "m.server": "example.org:8448" }';
         add_header access-control-allow-origin *;
         add_header content-type application/json;
+        return 200 '{ "m.server": "example.org:8448" }';
     }
 
     location /.well-known/matrix/client {
-        return 200 '{ "m.homeserver": { "base_url": "https://example.org" }, "im.vector.riot.jitsi": { "preferredDomain": "jitsi.example.org" } }';
         add_header access-control-allow-origin *;
         add_header content-type application/json;
+        return 200 '{ "m.homeserver": { "base_url": "https://example.org" }, 
+                      "m.identity_server": { "base_url": "https://identityserver.example.org" },
+                      "im.vector.riot.jitsi": { "preferredDomain": "jitsi.example.org" },
+                      }';
     }
 
 }
